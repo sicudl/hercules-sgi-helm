@@ -1,0 +1,589 @@
+# Configuration for the DEMO Environment of the SGI application
+
+# sgi-webapp (sub-chart for frontend)
+sgi-webapp:
+
+  # image to use for the sgi-webapp service
+  image:
+    repository: h3rcul3scru3/sgi-webapp
+    pullPolicy: Always
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  # ingress configuration for the sgi-webapp service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /
+
+# postgresql (persistent database)
+# see bitnami official chart docs for full options
+postgresql:
+
+  # wether to create or not an external persistent database
+  enabled: true
+
+  # image version to use
+  image:
+    tag: 12
+
+  # persistence options
+  persistence:
+    enable: true
+    storageClass: ""
+
+  # database name and access
+  postgresqlDatabase: db
+  postgresqlUsername: postgres
+  postgresqlPassword: admin
+
+  # kubernetes service options
+  service:
+    # By default, ClusterIP (no external access required). Change to LoadBalancer, if needed, to access to the DB from outside the k8s cluster.
+    type: ClusterIP
+
+  # this fixes issues with permissions in volume
+  volumePermissions:
+    enabled: true
+
+# sgi-usr-service (sub-chart backend based on sgi-service)
+sgi-usr-service:
+
+  # image to use for the sgi-usr-service
+  image:
+    repository: h3rcul3scru3/usr-service
+    pullPolicy: Always
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+
+  # ingress configuration for the sgi-usr-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/usr(/|$)(.*)
+
+# sgi-eti-service (sub-chart backend based on sgi-service)
+sgi-eti-service:
+
+  # image to use for the sgi-eti-service
+  image:
+    repository: h3rcul3scru3/eti-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+
+  extraEnvVariables:
+    - name: SGI_REST_API_REP-URL
+      value: "http://sgi-sgi-rep-service"
+    - name: SGI_REST_API_SGDOC-URL
+      value: "http://sgi-sgi-esb/sgdoc"
+
+  # ingress configuration for the sgi-eti-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/eti(/|$)(.*)
+
+# sgi-csp-service (sub-chart backend based on sgi-service)
+sgi-csp-service:
+
+  # image to use for the sgi-csp-service
+  image:
+    repository: h3rcul3scru3/csp-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  extraEnvVariables:
+    - name: SGI_REST_API_ETI-URL
+      value: "http://sgi-sgi-eti-service"
+
+  # ingress configuration for the sgi-csp-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/csp(/|$)(.*)
+
+# sgi-pii-service (sub-chart backend based on sgi-service)
+sgi-pii-service:
+
+  # image to use for the sgi-pii-service
+  image:
+    repository: h3rcul3scru3/pii-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  # ingress configuration for the sgi-pii-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/pii(/|$)(.*)
+
+# sgi-rel-service (sub-chart backend based on sgi-service)
+sgi-rel-service:
+
+  # image to use for the sgi-rel-service
+  image:
+    repository: h3rcul3scru3/rel-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  # ingress configuration for the sgi-rel-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/rel(/|$)(.*)
+
+# sgi-tp-service (sub-chart backend based on sgi-service)
+sgi-tp-service:
+
+  # image to use for the sgi-tp-service
+  image:
+    repository: h3rcul3scru3/tp-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  imagePullSecrets:
+    - name: sgi-docker-repo-secret
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  extraEnvVariables:
+    - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN-URI
+      value: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/token
+    - name: SGI_REST_API_ETI-URL
+      value: "http://sgi-sgi-eti-service"
+    - name: SGI_REST_API_CSP-URL
+      value: "http://sgi-sgi-csp-service"
+    - name: SGI_REST_API_USR-URL
+      value: "http://sgi-sgi-usr-service"
+    - name: SGI_REST_API_PII-URL
+      value: "http://sgi-sgi-pii-service"
+    - name: SGI_REST_API_REL-URL
+      value: "http://sgi-sgi-rel-service"
+    - name: SGI_REST_API_TP-URL
+      value: "http://sgi-sgi-tp-service"
+    - name: SGI_REST_API_COM-URL
+      value: "http://sgi-sgi-com-service"
+    - name: SGI_REST_API_REP-URL
+      value: "http://sgi-sgi-rep-service"
+
+  # ingress configuration for the sgi-tp-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/tp(/|$)(.*)
+
+# sgi-com-service (sub-chart backend based on sgi-service)
+sgi-com-service:
+
+  # image to use for the sgi-com-service
+  image:
+    repository: h3rcul3scru3/com-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  # ingress configuration for the sgi-com-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/com(/|$)(.*)
+
+# sgi-rep-service (sub-chart backend based on sgi-service)
+sgi-rep-service:
+
+  # image to use for the sgi-rep-service
+  image:
+    repository: h3rcul3scru3/rep-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  extraEnvVariables:
+    - name: SGI_REST_API_ETI-URL
+      value: "http://sgi-sgi-eti-service"
+    - name: SGI_REST_API_CSP-URL
+      value: "http://sgi-sgi-csp-service"
+    - name: SGI_REST_API_USR-URL
+      value: "http://sgi-sgi-usr-service"
+    - name: SGI_REST_API_PII-URL
+      value: "http://sgi-sgi-pii-service"
+    - name: SGI_REST_API_REL-URL
+      value: "http://sgi-sgi-rel-service"
+    - name: SGI_REST_API_TP-URL
+      value: "http://sgi-sgi-tp-service"
+    - name: SGI_REST_API_COM-URL
+      value: "http://sgi-sgi-com-service"
+    - name: SGI_REST_API_SGP-URL
+      value: "http://sgi-sgi-esb/sgp"
+    - name: SGI_REST_API_SGEMP-URL
+      value: "http://sgi-sgi-esb/sgemp"
+
+  # ingress configuration for the sgi-rep-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/rep(/|$)(.*)
+
+# sgi-cnf-service (sub-chart backend based on sgi-service)
+sgi-cnf-service:
+
+  # image to use for the sgi-com-service
+  image:
+    repository: h3rcul3scru3/cnf-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  database:
+    use_sidecar: false 
+
+  spring:
+    securityOauth2ResourceserverJwtJwkSetUri: http://sgi-sgi-keycloak/auth/realms/sgi/protocol/openid-connect/certs
+    securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
+    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    liquibaseContexts: dev
+
+  # ingress configuration for the sgi-com-service
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api/cnf(/|$)(.*)
+
+# sub-chart with keycloak auth service
+sgi-keycloak:
+
+  # need to set proper frontend url (will be passed as )
+  settings:
+
+  # ingress configuration for the keycloak
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /auth
+
+# sub-chart with esb integrator service (currently external)
+sgi-esb:
+
+  # this is not a dev environment
+  dev: false
+
+  # image to use for the sgi-esb
+  image:
+    repository: h3rcul3scru3/esb-wso2-mi
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  service:
+    type: ClusterIP
+    port: 80
+    internalPort: 8290
+
+  auth:
+    server:
+      url: http://sgi-sgi-keycloak/auth
+      realm:
+        id: sgi
+
+  sgdoc:
+    service:
+      url: http://sgi-sgdoc-service
+      key: APIKEY
+
+  sgp:
+    service:
+      url: https://sgp.university.com/
+      key: APIKEY
+
+  sge:
+    service:
+      url: http://sge.university.com/
+      key: APIKEY
+
+  sgemp:
+    service:
+      url: http://sgemp.university.com/
+      key: APIKEY
+
+  sgepii:
+    service:
+      url: http://sge-pii.university.com/
+      key: APIKEY
+      piiUrl: http://sgi-sgi-pii-service
+
+  sgo:
+    service:
+      url: https://sgo.university.com/
+      key: APIKEY
+      standalone: http://sgi-sgo-service
+
+  sgi:
+    service:
+      cspUrl: http://sgi-sgi-csp-service
+
+  # ingress configuration for the sgi-esb
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/rewrite-target: $1
+    hosts:
+      - host: demo.hercules-sgi.com
+        paths:
+            - path: /api(/.*)
+
+  sgp-composite-application:
+    enabled: false
+
+  sgemp-composite-application:
+    enabled: false
+
+  sgo-composite-application:
+    enabled: false
+
+  sge-composite-application:
+    enabled: false
+
+  sgepii-composite-application:
+    enabled: false
+
+  sgdoc-composite-application:
+    enabled: false
+
+  sgi-composite-application:
+    enabled: false
+
+sgp:
+  enabled: false
+sgemp:
+  enabled: false
+sgo:
+  enabled: true
+sge:
+  enabled: false
+sgdoc:
+  enabled: true
+
+# sgdoc-service (sub-chart backend based on sgi-external-service)
+sgdoc-service:
+
+# image to use for the sgdoc-service
+  image:
+    repository: h3rcul3scru3/external/sgdoc-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  spring:
+    datasourceUrl: jdbc:postgresql://localhost:5432/db
+
+  # ingress configuration for the sgp-service
+  ingress:
+    enabled: false
+
+# sgo-service (sub-chart backend based on sgi-external-service)
+sgo-service:
+
+# image to use for the sgdoc-service
+  image:
+    repository: h3rcul3scru3/external/sgo-service
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: 0.0.6
+
+  #by default activate rollme annotation to rollout pod with every update
+  annotations:
+    enabled: true 
+    podAnnotations: {}
+
+  spring:
+    datasourceUrl: jdbc:postgresql://localhost:5432/db
+    liquibaseContexts: dev
+
+  # ingress configuration for the sgp-service
+  ingress:
+    enabled: false
