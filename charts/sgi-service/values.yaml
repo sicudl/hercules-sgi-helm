@@ -25,9 +25,8 @@ spring:
   datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
   liquibaseContexts: dev
 
-extraEnvVariables:
-   {}
-  # Aditional Enviroment Variables
+extraEnvVariables: {}
+# Aditional Enviroment Variables
 
 imagePullSecrets: []
 nameOverride: ""
@@ -44,7 +43,7 @@ serviceAccount:
 
 #by default activate rollme annotation to rollout pod with every update
 annotations:
-  enabled: true 
+  enabled: true
   podAnnotations: {}
 
 podSecurityContext:

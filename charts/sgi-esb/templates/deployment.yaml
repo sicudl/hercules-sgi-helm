@@ -62,11 +62,21 @@ spec:
             value: {{ .Values.sgepii.service.piiUrl | quote }}
           - name: SGI_ESB_SGICSP_SERVICE_URL
             value: {{ .Values.sgi.service.cspUrl | quote }}
+          - name: SGI_ESB_SGIEER_SERVICE_URL
+            value: {{ .Values.sgi.service.eerUrl | quote }}
+          - name: SGI_ESB_SGIPRC_SERVICE_URL
+            value: {{ .Values.sgi.service.prcUrl | quote }}
+          - name: SGI_ESB_SGIUSR_SERVICE_URL
+            value: {{ .Values.sgi.service.usrUrl | quote }}
+          - name: SGI_ESB_CVN_SERVICE_URL
+            value: {{ .Values.cvn.service.url | quote }}
           {{- if .Values.extraEnvVariables }}
             {{- toYaml .Values.extraEnvVariables | nindent 10 }}
           {{- end }}
         ports:
           - containerPort: 8290
+        resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}

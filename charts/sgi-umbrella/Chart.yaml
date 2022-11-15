@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.29
+version: 0.1.40
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -37,6 +37,11 @@ dependencies:
   - name: sgi-service
     version: 0.1.5
     repository: "file://../sgi-service"
+    alias: sgi-eer-service
+
+  - name: sgi-service
+    version: 0.1.5
+    repository: "file://../sgi-service"
     alias: sgi-eti-service
 
   - name: sgi-service
@@ -47,7 +52,7 @@ dependencies:
   - name: sgi-service
     version: 0.1.5
     repository: "file://../sgi-service"
-    alias: sgi-pii-service  
+    alias: sgi-pii-service
 
   - name: sgi-service
     version: 0.1.5
@@ -74,45 +79,50 @@ dependencies:
     repository: "file://../sgi-service"
     alias: sgi-cnf-service
 
+  - name: sgi-service
+    version: 0.1.5
+    repository: "file://../sgi-service"
+    alias: sgi-prc-service
+
   - name: sgi-keycloak
-    version: 0.1.6
+    version: 0.1.12
     repository: "file://../sgi-keycloak"
 
   - name: sgi-esb
-    version: 0.1.18
+    version: 0.1.22
     repository: "file://../sgi-esb"
-  
+
   - name: sgi-esb-external
-    version: 0.1.1
+    version: 0.2.0
     repository: "file://../sgi-esb-external"
     alias: sgp-service
     condition: sgp.enabled
 
   - name: sgi-esb-external
-    version: 0.1.1
+    version: 0.2.0
     repository: "file://../sgi-esb-external"
     alias: sgemp-service
     condition: sgemp.enabled
 
   - name: sgi-esb-external
-    version: 0.1.1
+    version: 0.2.0
     repository: "file://../sgi-esb-external"
     alias: sgo-service
     condition: sgo.enabled
 
   - name: sgi-esb-external
-    version: 0.1.1
+    version: 0.2.0
     repository: "file://../sgi-esb-external"
     alias: sge-service
     condition: sge.enabled
 
   - name: sgi-esb-external
-    version: 0.1.1
+    version: 0.2.0
     repository: "file://../sgi-esb-external"
     alias: sgdoc-service
     condition: sgdoc.enabled
 
   - name: postgresql
-    version: "10.3.15"
+    version: "10.16.2"
     repository: "@bitnami"
     condition: postgresql.enabled

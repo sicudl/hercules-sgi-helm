@@ -44,6 +44,9 @@ spec:
             value: {{ .Values.settings.keycloakMigrationStrategy }}
           - name: KEYCLOAK_IMPORT
             value: /realm/sgi-realm.json
+          {{- if .Values.extraEnvVariables }}
+            {{- toYaml .Values.extraEnvVariables | nindent 10 }}
+          {{- end }}
           volumeMounts:
           - name: keycloak-realm
             mountPath: /realm/sgi-realm.json
