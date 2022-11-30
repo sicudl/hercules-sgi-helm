@@ -50,9 +50,9 @@ sgi-usr-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: usr
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: usr
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -97,9 +97,9 @@ sgi-eer-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: eer
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: eer
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -169,9 +169,9 @@ sgi-eti-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: eti
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: eti
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -243,9 +243,9 @@ sgi-csp-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: csp
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: csp
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -299,9 +299,9 @@ sgi-pii-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: pii
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: pii
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -346,9 +346,9 @@ sgi-rel-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: rel
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: rel
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -420,9 +420,9 @@ sgi-tp-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: tp
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: tp
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -500,9 +500,9 @@ sgi-rep-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: rep
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: rep
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -592,9 +592,9 @@ sgi-com-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: com
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: com
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -639,9 +639,9 @@ sgi-cnf-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: cnf
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: cnf
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -716,9 +716,9 @@ sgi-prc-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: prc
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: prc
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -774,10 +774,10 @@ sgi-keycloak:
       value: "auth"
     ## Database username
     - name: DB_USER
-      value: "auth"
+      value: "postgres"
     ## Database password
     - name: DB_PASSWORD
-      value: "auth"
+      value: "admin"
 
   configMap:
     sgiRealmJson: "config/sgi-realm.json"
@@ -949,9 +949,9 @@ sgo-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: sgo
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: sgo
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -1008,9 +1008,9 @@ sgdoc-service:
     - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
       value: org.postgresql.Driver
     - name: SPRING_DATASOURCE_USERNAME
-      value: sgo
+      value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: sgo
+      value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
