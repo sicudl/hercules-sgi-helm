@@ -906,7 +906,7 @@ sgo-service:
 
   image:
     # image.repository is required
-    repository: h3rcul3scru3/external/sgo-service
+    repository: h3rcul3scru3/sgo-service
     pullPolicy: Always
     # image.tag is required
     tag: 0.0.13
@@ -965,7 +965,7 @@ sgdoc-service:
 
   image:
     # image.repository is required
-    repository: h3rcul3scru3/external/sgdoc-service
+    repository: h3rcul3scru3/sgdoc-service
     pullPolicy: Always
     # image.tag is required
     tag: 0.0.13
@@ -1017,7 +1017,7 @@ sgdoc-service:
 ## To see all available options, helm show values bitnami/postgresql --version 10.16.2
 postgresql:
   # wether to create or not an external persistent database
-  enabled: false
+  enabled: true
 
   # image version to use
   image:
