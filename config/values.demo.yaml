@@ -1026,7 +1026,7 @@ postgresql:
 
   # persistence options
   persistence:
-    enable: false
+    enabled: false
     storageClass: ""
 
   # database name and access
