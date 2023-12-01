@@ -8,7 +8,7 @@ sgi-webapp:
     repository: h3rcul3scru3/sgi-webapp
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
   ## Should be enabled and set the correct hostname to be accesible from outside
   ingress:
@@ -28,7 +28,7 @@ sgi-usr-service:
     repository: h3rcul3scru3/usr-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
 
   spring:
@@ -122,7 +122,7 @@ sgi-eti-service:
     repository: h3rcul3scru3/eti-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
 
   spring:
@@ -194,7 +194,7 @@ sgi-csp-service:
     repository: h3rcul3scru3/csp-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -445,7 +445,7 @@ sgi-rep-service:
     repository: h3rcul3scru3/rep-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -617,7 +617,7 @@ sgi-cnf-service:
     repository: h3rcul3scru3/cnf-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -741,7 +741,7 @@ sgi-keycloak:
     repository: h3rcul3scru3/auth
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
   settings:
     # Admin username
@@ -800,7 +800,7 @@ sgi-esb:
     repository: h3rcul3scru3/esb-wso2-mi
     pullPolicy: Always
     # image.tag is required
-    tag: 0.1.0
+    tag: 0.2.0
 
   ## Auth validation config
   auth:
