@@ -819,7 +819,7 @@ sgi-esb:
   sgp:
     service:
       ## Base url of SGP service
-      url: https://sgp.university.com/
+      url: http://udl-hercules-udl-mi/sgp/
       ## Api-Key
       key: default-key
   ## SGE module config
@@ -833,7 +833,7 @@ sgi-esb:
   sgemp:
     service:
       ## Base url of SGEMP service
-      url: http://sgemp.university.com/
+      url: http://udl-hercules-udl-mi/sgemp/
       ## Api-Key
       key: default-key
   ## SGEPII module config
@@ -849,7 +849,7 @@ sgi-esb:
   sgo:
     service:
       ## Base url of SGO service
-      url: https://sgo.university.com/
+      url: http://udl-hercules-udl-mi/sgo/
       ## Api-Key
       key: default-key
       ## Base url of SGO service standalone implementation
