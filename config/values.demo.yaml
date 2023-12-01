@@ -644,6 +644,8 @@ sgi-cnf-service:
       value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
+    - name: SGI_RESOURCES-CACHE-MAX-AGE
+      value: "60"
 
   ## Should be enabled and set the correct hostname to be accesible from outside
   ingress:
@@ -651,6 +653,7 @@ sgi-cnf-service:
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/rewrite-target: /$2
+      nginx.ingress.kubernetes.io/proxy-body-size: "10m" #Default size is 1M
     hosts:
       - host: demohercules.udl.cat
         paths:
@@ -887,6 +890,7 @@ sgi-esb:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/rewrite-target: $1
       nginx.ingress.kubernetes.io/proxy-body-size: "10m" #Default size is 1M, needed for sgdoc
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "180" #Default timeout 60s, needed for sge slow endpoints
     hosts:
       - host: demohercules.udl.cat
         paths:
