@@ -1029,14 +1029,10 @@ postgresql:
     tag: 12
 
   # persistence options
-  persistence:
-    enabled: false
-    storageClass: ""
-
-  # database name and access
-  postgresqlDatabase: db
-  postgresqlUsername: postgres
-  postgresqlPassword: admin
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
 
   # Override postgresql.conf configuration
   postgresqlExtendedConf: { "maxConnections": "1024" }

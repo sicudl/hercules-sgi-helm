@@ -2263,18 +2263,19 @@ postgresql:
   image:
     tag: 12
 
-  # persistence options
-  persistence:
-    enable: false
-    storageClass: ""
-
   # database name and access
-  postgresqlDatabase: db
-  postgresqlUsername: postgres
-  postgresqlPassword: admin
+  auth:
+    database: db
+    postgresPassword: admin
 
   # Override postgresql.conf configuration
-  postgresqlExtendedConf: { "maxConnections": "1024" }
+  primary:
+    extendedConfiguration: |
+        max_connections = 1024
+    # persistence options
+    persistence:
+      enabled: false
+      storageClass: ""
 
   # this fixes issues with permissions in volume
   volumePermissions:
