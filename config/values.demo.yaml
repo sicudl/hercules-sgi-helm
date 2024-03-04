@@ -989,12 +989,13 @@ sgdoc-service:
       size: 1Gi
   # Service persistence configuration, when needed
   persistence:
-    enabled: false
-    storageClass: ""
-    mountPath: /data
+    enabled: true
+    storageClass: "default"
+    existingClaim: "data-sgi-sgdoc"
+    mountPath: /tmp/store
     accessModes:
       - ReadWriteOnce
-    size: 10Gi
+    size: 16Gi
 
   spring:
     ## JDBC connection to database
