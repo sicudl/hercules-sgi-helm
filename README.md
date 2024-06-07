@@ -16,8 +16,8 @@ The deployment configuration is divided in two parts:
   - [charts/sgi-umbrella](./charts/sgi-umbrella): the purpose of this chart is to group all those below to deploy the SGI application in a given environment, to generate a single artifact.
   - [charts/sgi-webapp](./charts/sgi-webapp): this is a chart for the frontend component of the application, it is based on nginx.
   - [charts/sgi-service](./charts/sgi-service): this is a generic chart for each of the SprintBoot micro-services.
-  - [charts/sgi-keycloak](./charts/sgi-keycloak): authentication service required by most of the services, currently the configuration is hard-coded in a ConfigMap inside the chart. 
-  - [charts/sgi-esb](./charts/sgi-esb): this chart includes an enterprise service bus (ESB) required by SGI, to expose API is required to deploy esb composite applications (CAR). 
+  - [charts/sgi-keycloak](./charts/sgi-keycloak): authentication service required by most of the services, currently the configuration is hard-coded in a ConfigMap inside the chart.
+  - [charts/sgi-esb](./charts/sgi-esb): this chart includes an enterprise service bus (ESB) required by SGI, to expose API is required to deploy esb composite applications (CAR).
     - [charts/sgi-esb-car](./charts/sgi-esb-car): Generic chart for deploying CAR files. These CAR files are deployed with batch jobs (using helm hooks) and copy them into shared persistent volume.
     - [charts/sgi-esb-external](./charts/sgi-esb-external): This is a generic chart for each of the External SprintBoot micro-services to be used by ESB CAR API.
   - For the standard deployment (demo, staging and prod) the umbrella chart also deploys postgresql using the [official bitnami chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql).
@@ -49,13 +49,13 @@ Alternatively, we can directly install/update or inspect a deployment using dire
 We can then upgrade (or install if it does not exist), for example the demo environment, using the following command:
 
 ```bash
-helm upgrade sgi sgi-umbrella-0.1.29.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
+helm upgrade sgi sgi-umbrella-0.1.46.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
 ```
 
 To modify some of the properties of the environment we can either modify the corresponding `values.*.yaml` file or directly overwrite a given parameter using `--set`.  For example imagine we want to overwrite the usr-service version in `values.demo.yaml` with a newer docker image version `0.1.0`, we can use the following command:
 
 ```bash
-helm upgrade sgi sgi-umbrella-0.1.29.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --set usr-service.image.tag==0.1.0
+helm upgrade sgi sgi-umbrella-0.1.46.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --set usr-service.image.tag==0.1.0
 ```
 
 The previous pattern can be very useful for updating an environment within the CI/CD pipeline of a given service. Note that to use the command as before, we need to have access the the `values.demo.yaml` with the default values. Alternatively if we are simply upgrading an environment (e.g. changing the image tag of one of the services) we can simply use the option `--reuse-values` instead of specifying the default environment values.

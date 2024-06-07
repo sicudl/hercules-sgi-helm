@@ -8,7 +8,7 @@ sgi-webapp:
     repository: h3rcul3scru3/sgi-webapp
     pullPolicy: Always
     # image.tag is required
-    tag: 0.4.0
+    tag: 0.5.0
 
   ## Should be enabled and set the correct hostname to be accesible from outside
   ingress:
@@ -122,7 +122,7 @@ sgi-eti-service:
     repository: h3rcul3scru3/eti-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.4.0
+    tag: 0.5.0
 
 
   spring:
@@ -173,7 +173,7 @@ sgi-eti-service:
     - name: SPRING_DATASOURCE_PASSWORD
       value: admin
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
-      value: org.hibernate.dialect.PostgreSQL95Dialect
+      value: org.crue.hercules.sgi.eti.repository.functions.CustomPostgreSQL9Dialect
 
   ## Should be enabled and set the correct hostname to be accesible from outside
   ingress:
@@ -194,7 +194,7 @@ sgi-csp-service:
     repository: h3rcul3scru3/csp-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.4.0
+    tag: 0.5.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -268,7 +268,7 @@ sgi-pii-service:
     repository: h3rcul3scru3/pii-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.3.0
+    tag: 0.4.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -445,7 +445,7 @@ sgi-rep-service:
     repository: h3rcul3scru3/rep-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.4.0
+    tag: 0.5.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -525,7 +525,7 @@ sgi-com-service:
     repository: h3rcul3scru3/com-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.3.0
+    tag: 0.4.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -617,7 +617,7 @@ sgi-cnf-service:
     repository: h3rcul3scru3/cnf-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.4.0
+    tag: 0.5.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -667,7 +667,7 @@ sgi-prc-service:
     repository: h3rcul3scru3/prc-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.2.0
+    tag: 0.3.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
@@ -803,7 +803,7 @@ sgi-esb:
     repository: h3rcul3scru3/esb-wso2-mi
     pullPolicy: Always
     # image.tag is required
-    tag: 0.4.0-um
+    tag: 0.5.0-um
 
   ## Auth validation config
   auth:
