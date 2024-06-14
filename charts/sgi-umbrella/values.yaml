@@ -2280,3 +2280,29 @@ postgresql:
   # this fixes issues with permissions in volume
   volumePermissions:
     enabled: true
+
+postgresql-16:
+  # wether to create or not an external persistent database
+  enabled: false
+
+  # image version to use
+  image:
+    tag: 16.3.0-debian-12-r13
+
+  # database name and access
+  auth:
+    database: db
+    postgresPassword: admin
+
+  # Override postgresql.conf configuration
+  primary:
+    extendedConfiguration: |
+        max_connections = 1024
+    # persistence options
+    persistence:
+      enabled: false
+      storageClass: ""
+
+  # this fixes issues with permissions in volume
+  volumePermissions:
+    enabled: true

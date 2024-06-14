@@ -37,7 +37,7 @@ sgi-usr-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -52,7 +52,10 @@ sgi-usr-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -83,7 +86,7 @@ sgi-eer-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -99,7 +102,10 @@ sgi-eer-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -131,7 +137,7 @@ sgi-eti-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -171,7 +177,10 @@ sgi-eti-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.crue.hercules.sgi.eti.repository.functions.CustomPostgreSQL9Dialect
 
@@ -202,7 +211,7 @@ sgi-csp-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -245,7 +254,10 @@ sgi-csp-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -276,7 +288,7 @@ sgi-pii-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -301,7 +313,10 @@ sgi-pii-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -332,7 +347,7 @@ sgi-rel-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -348,7 +363,10 @@ sgi-rel-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -379,7 +397,7 @@ sgi-tp-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -422,7 +440,10 @@ sgi-tp-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -453,7 +474,7 @@ sgi-rep-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -502,7 +523,10 @@ sgi-rep-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -533,7 +557,7 @@ sgi-com-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -594,7 +618,10 @@ sgi-com-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -625,7 +652,7 @@ sgi-cnf-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -641,7 +668,10 @@ sgi-cnf-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
     - name: SGI_RESOURCES-CACHE-MAX-AGE
@@ -675,7 +705,7 @@ sgi-prc-service:
     ## Standard discovery endpoint for Oauth2. Change only the hostname or protocol.
     securityOauth2ClientProviderKeycloackIssuerUri: http://sgi-sgi-keycloak/auth/realms/sgi
     ## JDBC conection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -721,7 +751,10 @@ sgi-prc-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -764,7 +797,7 @@ sgi-keycloak:
       value: "postgres"
     ## Database hostname
     - name: DB_ADDR
-      value: "sgi-postgresql"
+      value: "sgi-postgresql-16"
     ## Database port
     - name: DB_PORT
       value: "5432"
@@ -780,7 +813,10 @@ sgi-keycloak:
       value: "postgres"
     ## Database password
     - name: DB_PASSWORD
-      value: "admin"
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
 
   configMap:
     sgiRealmJson: "config/sgi-realm.json"
@@ -939,7 +975,7 @@ sgo-service:
 
   spring:
     ## JDBC connection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -955,7 +991,10 @@ sgo-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -999,7 +1038,7 @@ sgdoc-service:
 
   spring:
     ## JDBC connection to database
-    datasourceUrl: jdbc:postgresql://sgi-postgresql:5432/db
+    datasourceUrl: jdbc:postgresql://sgi-postgresql-16:5432/db
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
@@ -1015,7 +1054,10 @@ sgdoc-service:
     - name: SPRING_DATASOURCE_USERNAME
       value: postgres
     - name: SPRING_DATASOURCE_PASSWORD
-      value: admin
+      valueFrom:
+        secretKeyRef:
+          name: sgi-postgresql-16
+          key: postgres-password
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
@@ -1028,6 +1070,52 @@ postgresql:
   # image version to use
   image:
     tag: 12
+
+  # persistence options
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+#    extraVolumes:
+#      - name: backupdir
+#        persistentVolumeClaim:
+#          claimName: pvc-backup
+#    extraVolumeMounts:
+#      - name: backupdir
+#        mountPath: /backup/pgdump
+#        subPath:
+#        readOnly: true
+
+  # Override postgresql.conf configuration
+  postgresqlExtendedConf: { "maxConnections": "1024" }
+
+  # this fixes issues with permissions in volume
+  volumePermissions:
+    enabled: true
+
+# # backup
+#  backup:
+#    enabled: true
+#    cronjob:
+#      storage:
+#        enabled: true
+#        existingClaim: "pvc-backup"
+#        storageClass: "default"
+#        accessModes:
+#          - ReadWriteOnce
+#        size: 8Gi
+#        mountPath: /backup/pgdump
+
+
+## Auxiliar postgresql deployment. Use binami chart version 15.5.4
+## To see all available options, helm show values bitnami/postgresql --version 15.5.4
+postgresql-16:
+  # wether to create or not an external persistent database
+  enabled: true
+
+  # image version to use
+  image:
+    tag: 16.3.0-debian-12-r13
 
   # persistence options
   primary:
@@ -1051,7 +1139,7 @@ postgresql:
   volumePermissions:
     enabled: true
 
- # backup
+  # backup
   backup:
     enabled: true
     cronjob:
