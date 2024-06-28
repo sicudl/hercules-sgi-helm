@@ -1061,52 +1061,6 @@ sgdoc-service:
     - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
       value: org.hibernate.dialect.PostgreSQL95Dialect
 
-## Auxiliar postgresql deployment. Use binami chart version 10.16.2
-## To see all available options, helm show values bitnami/postgresql --version 10.16.2
-postgresql:
-  # wether to create or not an external persistent database
-  enabled: true
-
-  # image version to use
-  image:
-    tag: 12
-
-  # persistence options
-  primary:
-    persistence:
-      enabled: true
-      storageClass: ""
-#    extraVolumes:
-#      - name: backupdir
-#        persistentVolumeClaim:
-#          claimName: pvc-backup
-#    extraVolumeMounts:
-#      - name: backupdir
-#        mountPath: /backup/pgdump
-#        subPath:
-#        readOnly: true
-
-  # Override postgresql.conf configuration
-  postgresqlExtendedConf: { "maxConnections": "1024" }
-
-  # this fixes issues with permissions in volume
-  volumePermissions:
-    enabled: true
-
-# # backup
-#  backup:
-#    enabled: true
-#    cronjob:
-#      storage:
-#        enabled: true
-#        existingClaim: "pvc-backup"
-#        storageClass: "default"
-#        accessModes:
-#          - ReadWriteOnce
-#        size: 8Gi
-#        mountPath: /backup/pgdump
-
-
 ## Auxiliar postgresql deployment. Use binami chart version 15.5.4
 ## To see all available options, helm show values bitnami/postgresql --version 15.5.4
 postgresql-16:

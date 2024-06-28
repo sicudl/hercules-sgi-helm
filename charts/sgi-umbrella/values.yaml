@@ -2253,34 +2253,8 @@ sgdoc-service:
 
   affinity: {}
 
-## Auxiliar postgresql deployment. Use binami chart version 10.16.2
-## To see all available options, helm show values bitnami/postgresql --version 10.16.2
-postgresql:
-  # wether to create or not an external persistent database
-  enabled: false
-
-  # image version to use
-  image:
-    tag: 12
-
-  # database name and access
-  auth:
-    database: db
-    postgresPassword: admin
-
-  # Override postgresql.conf configuration
-  primary:
-    extendedConfiguration: |
-        max_connections = 1024
-    # persistence options
-    persistence:
-      enabled: false
-      storageClass: ""
-
-  # this fixes issues with permissions in volume
-  volumePermissions:
-    enabled: true
-
+## Auxiliar postgresql deployment. Use binami chart version 15.5.4
+## To see all available options, helm show values bitnami/postgresql --version 15.5.4
 postgresql-16:
   # wether to create or not an external persistent database
   enabled: false
