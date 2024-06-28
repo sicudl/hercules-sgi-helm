@@ -1123,15 +1123,15 @@ postgresql-16:
       enabled: true
       storageClass: ""
     resourcesPreset: "small"
-#    extraVolumes:
-#      - name: backupdir
-#        persistentVolumeClaim:
-#          claimName: pvc-backup
-#    extraVolumeMounts:
-#      - name: backupdir
-#        mountPath: /backup/pgdump
-#        subPath:
-#        readOnly: true
+    extraVolumes:
+      - name: backupdir
+        persistentVolumeClaim:
+          claimName: pvc-postgresbackup
+    extraVolumeMounts:
+      - name: backupdir
+        mountPath: /backup/pgdump
+        subPath:
+        readOnly: true
 
   # Override postgresql.conf configuration
   postgresqlExtendedConf: { "maxConnections": "1024" }
@@ -1141,15 +1141,15 @@ postgresql-16:
     enabled: true
     resourcesPreset: "micro"
 
-#  # backup
-#  backup:
-#    enabled: true
-#    cronjob:
-#      storage:
-#        enabled: true
-#        existingClaim: "pvc-backup"
-#        storageClass: "default"
-#        accessModes:
-#          - ReadWriteOnce
-#        size: 8Gi
-#        mountPath: /backup/pgdump
+  # backup
+  backup:
+    enabled: true
+    cronjob:
+      storage:
+        enabled: true
+        existingClaim: "pvc-postgresbackup"
+        storageClass: "azurefile-csi"
+        accessModes:
+          - ReadWriteMany
+        size: 8Gi
+        mountPath: /backup/pgdump
