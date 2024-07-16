@@ -925,7 +925,7 @@ sgi-esb:
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/rewrite-target: $1
-      nginx.ingress.kubernetes.io/proxy-body-size: "10m" #Default size is 1M, needed for sgdoc
+      nginx.ingress.kubernetes.io/proxy-body-size: "15m" #Default size is 1M, needed for sgdoc
       nginx.ingress.kubernetes.io/proxy-read-timeout: "180" #Default timeout 60s, needed for sge slow endpoints
     hosts:
       - host: demohercules.udl.cat
@@ -1042,6 +1042,14 @@ sgdoc-service:
     ## Valid values: dev or pro
     ## With dev, sample data will be loaded
     liquibaseContexts: dev
+    http:
+      multipart:
+        max-file-size: 15MB
+        max-request-size: 15MB
+    servlet:
+      multipart:
+        max-file-size: 15MB
+        max-request-size: 15MB
 
   ## Aditional Enviroment Variables (See Spring Boot Documentation) for additional supported variables
   ## Values can be provided from secrets, see https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
