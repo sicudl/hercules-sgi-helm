@@ -128,7 +128,7 @@ sgi-eti-service:
     repository: h3rcul3scru3/eti-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.5.0
+    tag: 0.5.1
 
 
   spring:
