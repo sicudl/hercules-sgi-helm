@@ -14,9 +14,9 @@ helm package ./charts/sgi-umbrella/
 helm package -u ./charts/sgi-umbrella/
 
 # per comprovar configuració yaml que s'envia a k8s --dry-run
-helm upgrade sgi sgi-umbrella-0.1.50.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --dry-run  > dry_run_0.1.50-upgrade.yml
+helm upgrade sgi sgi-umbrella-0.1.51.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --dry-run  > dry_run_0.1.51-upgrade.yml
 
-helm upgrade sgi sgi-umbrella-0.1.50.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
+helm upgrade sgi sgi-umbrella-0.1.51.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
 ```
 
 ## SGI Changelog 20230412
@@ -52,3 +52,7 @@ S'assigna a l'usuari *administrador-global* i *administrador-csp* i permet gesti
 ## SGI Changelog 20240621
 
 * [Aplicat 20240621](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20240621.md)
+
+## SGI Changelog 20240715
+
+* [Aplicat 20240715](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20240715.md)

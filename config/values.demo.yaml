@@ -8,7 +8,7 @@ sgi-webapp:
     repository: h3rcul3scru3/sgi-webapp
     pullPolicy: Always
     # image.tag is required
-    tag: 0.6.0
+    tag: 0.7.0
 
   ## Should be enabled and set the correct hostname to be accesible from outside
   ingress:
@@ -203,7 +203,7 @@ sgi-csp-service:
     repository: h3rcul3scru3/csp-service
     pullPolicy: Always
     # image.tag is required
-    tag: 0.5.0
+    tag: 0.6.0
 
   spring:
     ## Endpoint of Signing certificate of JWT tokens. Change only the hostname or protocol.
