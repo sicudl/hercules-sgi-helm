@@ -49,13 +49,13 @@ Alternatively, we can directly install/update or inspect a deployment using dire
 We can then upgrade (or install if it does not exist), for example the demo environment, using the following command:
 
 ```bash
-helm upgrade sgi sgi-umbrella-0.1.49.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
+helm upgrade sgi sgi-umbrella-0.1.50.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
 ```
 
 To modify some of the properties of the environment we can either modify the corresponding `values.*.yaml` file or directly overwrite a given parameter using `--set`.  For example imagine we want to overwrite the usr-service version in `values.demo.yaml` with a newer docker image version `0.1.0`, we can use the following command:
 
 ```bash
-helm upgrade sgi sgi-umbrella-0.1.49.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --set usr-service.image.tag==0.1.0
+helm upgrade sgi sgi-umbrella-0.1.50.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --set usr-service.image.tag==0.1.0
 ```
 
 The previous pattern can be very useful for updating an environment within the CI/CD pipeline of a given service. Note that to use the command as before, we need to have access the the `values.demo.yaml` with the default values. Alternatively if we are simply upgrading an environment (e.g. changing the image tag of one of the services) we can simply use the option `--reuse-values` instead of specifying the default environment values.
