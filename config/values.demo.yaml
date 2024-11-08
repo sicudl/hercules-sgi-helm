@@ -865,7 +865,7 @@ sgi-esb:
   sge:
     service:
       ## Base url of SGE service
-      url: https://sge.university.com/
+      url: http://udl-hercules-udl-mi/sge/
       ## Api-Key
       key: default-key
   ## SGEMP module config
@@ -917,7 +917,7 @@ sgi-esb:
   extraEnvVariables:
     ## Runtime context
     - name: SGI_ESB_CONTEXT
-      value: "dev"
+      value: "preprod"
 
   ## Should be enabled and set the correct hostname to be accesible from outside
   ingress:
