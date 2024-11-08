@@ -56,3 +56,7 @@ S'assigna a l'usuari *administrador-global* i *administrador-csp* i permet gesti
 ## SGI Changelog 20240715
 
 * [Aplicat 20240715](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20240715.md)
+
+## SGI Changelog 20241011
+
+* [Aplicat 20241011](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20241011.md)
