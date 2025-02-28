@@ -1,11 +1,9 @@
 # Aplicació de changelogs HerculesCRUE/SGI
 
-
 Aplicar els canvis necessaris als fitxers:
 
- * charts/sgi-umbrella/Chart.yaml
- * config/values.demo.yaml
-
+* charts/sgi-umbrella/Chart.yaml
+* config/values.demo.yaml
 
 ```bash
 helm repo update
@@ -14,9 +12,9 @@ helm package ./charts/sgi-umbrella/
 helm package -u ./charts/sgi-umbrella/
 
 # per comprovar configuració yaml que s'envia a k8s --dry-run
-helm upgrade sgi sgi-umbrella-0.1.52.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --dry-run  > dry_run_0.1.52-upgrade.yml
+helm upgrade sgi sgi-umbrella-0.1.53.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --dry-run  > dry_run_0.1.53-upgrade.yml
 
-helm upgrade sgi sgi-umbrella-0.1.52.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
+helm upgrade sgi sgi-umbrella-0.1.53.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
 ```
 
 ## SGI Changelog 20230412
@@ -65,3 +63,48 @@ S'assigna a l'usuari *administrador-global* i *administrador-csp* i permet gesti
 
 * [Aplicat 20241210](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20241210.md)
 * El upgrade a `sgi-esb: 0.7.0-um` no s'ha aplicat ja que és una customització del esb-sge per a la UM que s'especifica com a "Inclusión de campo "fondos europeos" y "programa" en el formly de alta proyecto SGE particular de la UMU." Amb aquest canvi ens deixa de funcionar l'assignació econòmica dels projectes.
+
+## SGI Changelog 20250227
+
+* [Aplicat 20250227](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20250227.md)
+
+## Ampliació de tamany del PVC de sgdoc
+
+Si fem el canvi al fitxer values.demo.yaml de 16Gi a 32Gi
+
+```yml
+  # Service persistence configuration, when needed
+  persistence:
+    enabled: true
+    storageClass: "default"
+    existingClaim: "data-sgi-sgdoc"
+    mountPath: /tmp/store
+    accessModes:
+      - ReadWriteOnce
+    size: 32Gi
+```
+
+Dona un error:
+
+```bash
+hercules-sgi-helm$ helm upgrade sgi sgi-umbrella-0.1.53.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
+Error: UPGRADE FAILED: cannot patch "sgi-sgdoc-service" with kind StatefulSet: StatefulSet.apps "sgi-sgdoc-service" is invalid: spec: Forbidden: updates to statefulset spec for fields other than 'replicas', 'ordinals', 'template', 'updateStrategy', 'persistentVolumeClaimRetentionPolicy' and 'minReadySeconds' are forbidden
+```
+
+Si fem el canvi des del **LENS** tot editant la configuració del *PVC* `data-sgi-sgdoc-service-0`
+
+```yml
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 32Gi
+```
+
+en guardar es desecadena la ampliació del PVC i disc corresponent:
+
+* MountVolume.NodeExpandVolume succeeded for volume "pvc-c225f25b-4cd1-4264-8422-821e60e69770" aks-defaultnpool-75499731-vmss000021
+* Require file system resize of volume on node
+* External resizer is resizing volume pvc-c225f25b-4cd1-4264-8422-821e60e69770
+* waiting for an external controller to expand this PVC
