@@ -14,9 +14,9 @@ helm package ./charts/sgi-umbrella/
 helm package -u ./charts/sgi-umbrella/
 
 # per comprovar configuració yaml que s'envia a k8s --dry-run
-helm upgrade sgi sgi-umbrella-0.1.51.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --dry-run  > dry_run_0.1.51-upgrade.yml
+helm upgrade sgi sgi-umbrella-0.1.52.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml --dry-run  > dry_run_0.1.52-upgrade.yml
 
-helm upgrade sgi sgi-umbrella-0.1.51.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
+helm upgrade sgi sgi-umbrella-0.1.52.tgz --install --namespace sgi-demo -f ./config/values.demo.yaml
 ```
 
 ## SGI Changelog 20230412
@@ -60,3 +60,8 @@ S'assigna a l'usuari *administrador-global* i *administrador-csp* i permet gesti
 ## SGI Changelog 20241011
 
 * [Aplicat 20241011](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20241011.md)
+
+## SGI Changelog 20241210
+
+* [Aplicat 20241210](https://github.com/HerculesCRUE/SGI/blob/main/changelog/20241210.md)
+* El upgrade a `sgi-esb: 0.7.0-um` no s'ha aplicat ja que és una customització del esb-sge per a la UM que s'especifica com a "Inclusión de campo "fondos europeos" y "programa" en el formly de alta proyecto SGE particular de la UMU." Amb aquest canvi ens deixa de funcionar l'assignació econòmica dels projectes.
