@@ -111,14 +111,51 @@ en guardar es desecadena la ampliació del PVC i disc corresponent:
 
 ## Neteja manual dels backups de la base de dades
 
-1. Despleguem el pod amb ubuntu i el volum muntat a `/mnt/backup` amb permisos de lectura/escriptura
+1. Creem un manifest `ubuntu-backup-clean.yaml` amb el pod amb ubuntu i el volum muntat a `/mnt/backup` amb permisos de lectura/escriptura
+
+  ```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-backup-clean
+  namespace: sgi-demo
+spec:
+  securityContext:
+    runAsUser: 0                # per assegurar permisos root
+    runAsGroup: 0
+    fsGroup: 0
+  containers:
+    - name: ubuntu
+      image: ubuntu:22.04
+      command: ["/bin/bash", "-c", "--"]
+      args: ["while true; do sleep 3600; done;"]
+      volumeMounts:
+        - name: backup-volume
+          mountPath: /mnt/backup
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+  volumes:
+    - name: backup-volume
+      persistentVolumeClaim:
+        claimName: pvc-postgresbackup
+  restartPolicy: Never
+  ```
 
   ```bash
   kubectl apply -f ubuntu-backup-clean.yaml
   #pod/ubuntu-backup-clean created
   ```
 
-2. Accedim al pod i eliminem els backup que no necessitem
+2. Via Lens o linia de comandes accedim al pod i eliminem els backup que no necessitem
+
+  ```bash
+  kubectl exec -it ubuntu-backup-clean created -n sgi-demo -- bash
+  ```
 
 3. Un cop fet neteja eliminem el pod
 
