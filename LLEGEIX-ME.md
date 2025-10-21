@@ -108,3 +108,20 @@ en guardar es desecadena la ampliació del PVC i disc corresponent:
 * Require file system resize of volume on node
 * External resizer is resizing volume pvc-c225f25b-4cd1-4264-8422-821e60e69770
 * waiting for an external controller to expand this PVC
+
+## Neteja manual dels backups de la base de dades
+
+1. Despleguem el pod amb ubuntu i el volum muntat a `/mnt/backup` amb permisos de lectura/escriptura
+
+  ```bash
+  kubectl apply -f ubuntu-backup-clean.yaml
+  #pod/ubuntu-backup-clean created
+  ```
+
+2. Accedim al pod i eliminem els backup que no necessitem
+
+3. Un cop fet neteja eliminem el pod
+
+  ```bash
+  kubectl delete pod ubuntu-backup-clean -n sgi-demo
+  ```
