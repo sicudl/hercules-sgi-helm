@@ -1077,6 +1077,7 @@ postgresql-16:
 
   # image version to use
   image:
+    repository: bitnamilegacy/postgresql
     tag: 16.3.0-debian-12-r13
 
   # persistence options
@@ -1102,6 +1103,9 @@ postgresql-16:
   volumePermissions:
     enabled: true
     resourcesPreset: "micro"
+    image:
+      repository: bitnamilegacy/os-shell
+
 
   # backup
   backup:
